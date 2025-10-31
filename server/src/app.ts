@@ -1,4 +1,4 @@
-import express, { Response, Request, NextFunction } from 'express';
+import express, { Response, Request } from 'express';
 import cors from 'cors';
 import { videos } from './routes/videos';
 import { AppError } from './typings/AppError';
@@ -15,17 +15,14 @@ export const app = express();
 app.use('/videos', cors(corsOptions), videos);
 
 // error handling middleware should be loaded after the loading the routes
-app.use(
-  '/',
-  (err: AppError, req: Request, res: Response, next: NextFunction) => {
-    const status = err.status || 500;
+app.use('/', (err: AppError, _: Request, res: Response) => {
+  const status = err.status ?? 500;
 
-    const formattedError: { status: number; message: string } = {
-      status,
-      message: err.message,
-    };
+  const formattedError: { status: number; message: string } = {
+    status,
+    message: err.message,
+  };
 
-    res.status(status);
-    res.send(JSON.stringify(formattedError));
-  }
-);
+  res.status(status);
+  res.send(JSON.stringify(formattedError));
+});

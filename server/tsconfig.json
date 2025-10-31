@@ -1,16 +1,16 @@
 {
   "compilerOptions": {
-    "target": "es2020",
-    "lib": ["esnext"],
+    "target": "ES2023",
+    "lib": ["ES2023"],
     "allowJs": false,
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
+    "module": "node16",
+    "moduleResolution": "node16",
+    "resolveJsonModule": false,
     "isolatedModules": true,
     "noEmit": true,
     "typeRoots": ["./node_modules/@types", "./src/@types"]
