@@ -1,7 +1,10 @@
-silverorange Native App Developer Assessment
-============================================
+silverorange SwiftUI App Developer Assessment
+=============================================
 
-This exercise is designed to assess how you approach tasks required in your position as a native app developer at silverorange. We are interested in how you work as much we're interested the final results, so please include useful Git commit messages and comments where you think your code may be unclear.
+This exercise is designed to assess how you approach tasks required in your
+position as a SwiftUI app developer at silverorange. We are interested in how
+you work as much we’re interested the final results, so please include useful
+Git commit messages and comments where you think your code may be unclear.
 
 Wireframe
 ---------
@@ -9,13 +12,13 @@ Wireframe
 
 Tasks
 -----
-Using either one of the blank Android projects, **or** one of the blank iOS projects found in `/android` or `/ios`, complete the following:
+Using the blank iOS project found in `/app`, complete the following:
 
  1. Display a screen similar to the provided wireframe. The screen should
     contain a video player at the top and a scrollable details section at the
     bottom.
- 2. Import and use the provided image assets in `assets/` for the media
-    controls. For Android, use the provided SVG files. For iOS, use the provided PDF files.
+ 2. Import and use the provided PDF image assets in `assets/` for the media
+    controls.
  3. Fetch a list of videos from the provided API (see instructions below for
     running the API).
  4. Sort the received list of videos by date.
@@ -32,70 +35,52 @@ Using either one of the blank Android projects, **or** one of the blank iOS proj
 
 Environment
 -----------
-For this project, you can use any one of:
+The project should run on supported iPhone devices and build using supported
+Xcode versions.
 
- - Android
-   - Kotlin or Java
-   - XML layouts or Jetpack Compose
- - iOS
-   - SwiftUI
-
-There are blank projects in the `android/` and `ios/` folders which should suit whichever combination of language, platform, and UI toolkit you prefer to work with. Please start with one of these blank projects using Android Studio or Xcode.
+Please start with the blank project in `/app` using Xcode.
 
 Dependencies
 ------------
-For media playback, Markdown parsing and/or networking you may want to use external dependencies. For Android, please use Gradle dependencies. For iOS, please use CocoaPods ([installation instructions](https://cocoapods.org/)) or Swift packages.
+For media playback, Markdown parsing and/or networking you may want to use
+external dependencies. Please use the Swift Package Manager.
 
 You may consider using these packages, but are not required to use them:
 
-iOS:
- - https://cocoapods.org/pods/MarkdownKit (Markdown)
- - https://cocoapods.org/pods/Down (Markdown)
- - https://cocoapods.org/pods/Alamofire (Networking)
-
-Android: 
- - https://github.com/google/ExoPlayer#using-exoplayer (Media playback)
- - https://noties.io/Markwon/docs/v4/install.html (Markdown)
- - https://github.com/google/gson#download (JSON parsing)
- - https://square.github.io/okhttp/#releases (HTTP)
- - https://square.github.io/retrofit/#download (HTTP + parsing)
+ - https://swiftpackageindex.com/gonzalezreal/swift-markdown-ui (Markdown)
+ - https://swiftpackageindex.com/johnxnguyen/Down (Markdown)
+ - https://swiftpackageindex.com/Alamofire/Alamofire (Networking)
 
 Commits
 -------
-Your commit history is important to us! Try to make meaningful commit messages that show your progress.
+Your commit history is important to us! Try to make meaningful commit messages
+that show your progress.
 
 Getting Started With the Server Backend (/server)
 -----------------------------------------------
-For this exercise a pre-built server application is provided. The application runs by default on `localhost:4000` and has the following endpoints:
+For this exercise a simple pre-built server application is provided. The
+application runs by default on `localhost:4000` and has the following endpoints:
 
  - `http://localhost:4000/videos` - returns a JSON-encoded array of videos.
 
 ### Running the Server
 
-The provided API server is needed as a data source for your project. To run the server you will need NodeJS and Yarn.
+The provided API server is needed as a data source for your project. To run the
+server you will need Node.js.
 
-![](docs/apple.svg) On macOS you can install the requirements using Homebrew ([installation instructions](https://brew.sh/)) with:
+You can quickly install the requirements using [Homebrew](https://brew.sh/) with:
 
 ```sh
-brew install node yarn
+brew install node
 ```
-
-![](docs/linux.svg) On Linux, use your distribution’s package manager to install Node JS and Yarn. Node 10 or greater is required. You may need to add repositories:
-
- - https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions
- - https://classic.yarnpkg.com/en/docs/install/#debian-stable
-
-![](docs/windows.svg) On Windows, the best option is to use package installers from:
-
- - https://nodejs.org/en/download/, and
- - https://classic.yarnpkg.com/en/docs/install/#windows-stable
 
 With dependencies installed, you can run the server with:
 
 ```sh
 cd server
-yarn install
-yarn start
+npm install
+npm start
 ```
 
-You can verify the API is working by visiting http://localhost:4000/videos in your browser or another HTTP client.
+You can verify the API is working by visiting http://localhost:4000/videos in
+your browser, or another HTTP client.
