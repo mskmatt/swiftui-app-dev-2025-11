@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		7F7C2F722EBD36B300F30536 /* Down in Frameworks */ = {isa = PBXBuildFile; productRef = 7F7C2F712EBD36B300F30536 /* Down */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		3A6E03BC2EB54816008E2A35 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -53,6 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F7C2F722EBD36B300F30536 /* Down in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -118,6 +123,7 @@
 			);
 			name = VideoPlayer;
 			packageProductDependencies = (
+				7F7C2F712EBD36B300F30536 /* Down */,
 			);
 			productName = VideoPlayer;
 			productReference = 3A6E03AB2EB54813008E2A35 /* VideoPlayer.app */;
@@ -201,6 +207,9 @@
 			);
 			mainGroup = 3A6E03A22EB54813008E2A35;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				7F7C2F702EBD36B300F30536 /* XCRemoteSwiftPackageReference "Down" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 3A6E03AC2EB54813008E2A35 /* Products */;
 			projectDirPath = "";
@@ -564,6 +573,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		7F7C2F702EBD36B300F30536 /* XCRemoteSwiftPackageReference "Down" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/johnxnguyen/Down";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		7F7C2F712EBD36B300F30536 /* Down */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7F7C2F702EBD36B300F30536 /* XCRemoteSwiftPackageReference "Down" */;
+			productName = Down;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 3A6E03A32EB54813008E2A35 /* Project object */;
 }
