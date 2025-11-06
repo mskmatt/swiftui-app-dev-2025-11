@@ -1,0 +1,23 @@
+//
+//  VideoModel.swift
+//  VideoPlayer
+//
+//  Created by Matthew Musoke on 2025-11-06.
+//
+
+import Foundation
+
+struct VideoModel: Identifiable, Codable {
+    let id: String
+    let title: String
+    let hlsURL: String
+    let fullURL: String
+    let description: String
+    let publishedAt: String
+    let author: AuthorModel
+}
+
+struct AuthorModel: Identifiable, Codable {
+    let id: String
+    let name: String
+}

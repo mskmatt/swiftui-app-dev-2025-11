@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7F7C2F722EBD36B300F30536 /* Down in Frameworks */ = {isa = PBXBuildFile; productRef = 7F7C2F712EBD36B300F30536 /* Down */; };
+		7F7C2F792EBD410300F30536 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 7F7C2F782EBD410300F30536 /* Alamofire */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7F7C2F722EBD36B300F30536 /* Down in Frameworks */,
+				7F7C2F792EBD410300F30536 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -124,6 +126,7 @@
 			name = VideoPlayer;
 			packageProductDependencies = (
 				7F7C2F712EBD36B300F30536 /* Down */,
+				7F7C2F782EBD410300F30536 /* Alamofire */,
 			);
 			productName = VideoPlayer;
 			productReference = 3A6E03AB2EB54813008E2A35 /* VideoPlayer.app */;
@@ -209,6 +212,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				7F7C2F702EBD36B300F30536 /* XCRemoteSwiftPackageReference "Down" */,
+				7F7C2F772EBD410300F30536 /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 3A6E03AC2EB54813008E2A35 /* Products */;
@@ -583,6 +587,14 @@
 				kind = branch;
 			};
 		};
+		7F7C2F772EBD410300F30536 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.10.2;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -590,6 +602,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 7F7C2F702EBD36B300F30536 /* XCRemoteSwiftPackageReference "Down" */;
 			productName = Down;
+		};
+		7F7C2F782EBD410300F30536 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7F7C2F772EBD410300F30536 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

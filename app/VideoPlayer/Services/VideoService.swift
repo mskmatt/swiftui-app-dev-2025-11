@@ -1,0 +1,32 @@
+//
+//  VideoService.swift
+//  VideoPlayer
+//
+//  Created by Matthew Musoke on 2025-11-06.
+//
+
+import Foundation
+import Alamofire
+
+protocol VideoServiceProtocol: AnyObject {
+    func getVideoList(completion: @escaping (Result<[VideoModel], AFError>) -> Void)
+}
+
+class VideoService: VideoServiceProtocol {
+    static let shared = VideoService()
+
+    private init() {}
+
+    func getVideoList(completion: @escaping (Result<[VideoModel], AFError>) -> Void) {
+        let response = AF.request("http://localhost:4000/videos", method: .get)
+            .validate()
+            .responseDecodable(of: [VideoModel].self) { response in
+                switch response.result {
+                case .success(let videos):
+                    completion(.success(videos))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+            }
+    }
+}
