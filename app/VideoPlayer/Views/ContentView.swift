@@ -15,6 +15,11 @@ struct ContentView: View {
         GeometryReader { geometry in
             if let currentVideo = videoViewModel.currentVideo, !videoViewModel.isLoading {
                 VStack(alignment: .center) {
+                    Text("Video Player")
+                        .font(.largeTitle)
+
+                    Spacer()
+
                     VideoPlayerView(
                         videoUrl: currentVideo.hlsURL,
                         isFirst: videoViewModel.videosIndex == 0,
@@ -27,6 +32,7 @@ struct ContentView: View {
                         }
                     )
                     .frame(width: geometry.size.width, height: geometry.size.width * 9 / 16, alignment: .center)
+
                     ScrollView {
                         VStack(alignment: .leading) {
                             Text(currentVideo.title)
@@ -39,6 +45,7 @@ struct ContentView: View {
                         }
                         .padding()
                     }
+
                     Spacer()
                 }
             } else if let errorMessage = videoViewModel.errorMessage {

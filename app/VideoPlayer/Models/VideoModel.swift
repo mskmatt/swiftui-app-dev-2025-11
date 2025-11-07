@@ -15,6 +15,12 @@ struct VideoModel: Identifiable, Codable {
     let description: String
     let publishedAt: String
     let author: AuthorModel
+
+    var publishedAtDate: Date? {
+        var dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        return dateFormatter.date(from: publishedAt)
+    }
 }
 
 struct AuthorModel: Identifiable, Codable {

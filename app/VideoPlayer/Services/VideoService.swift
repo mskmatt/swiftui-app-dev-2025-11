@@ -22,7 +22,15 @@ class VideoService: VideoServiceProtocol {
             .validate()
             .responseDecodable(of: [VideoModel].self) { response in
                 switch response.result {
-                case .success(let videos):
+                case .success(var videos):
+                    videos.sort {
+                        guard let firstDate = $0.publishedAtDate,
+                              let secondDate = $1.publishedAtDate
+                        else {
+                            return $0.publishedAt.compare($1.publishedAt) == .orderedDescending
+                        }
+                        return firstDate.compare(secondDate) == .orderedDescending
+                    }
                     completion(.success(videos))
                 case .failure(let error):
                     completion(.failure(error))
