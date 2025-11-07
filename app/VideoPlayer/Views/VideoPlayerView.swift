@@ -44,6 +44,7 @@ struct VideoPlayerView: View {
                     .overlay(alignment: .center) {
                         HStack {
                             Button {
+                                isPlaying = false
                                 previousCallback?()
                             } label: {
                                 Image("previous")
@@ -62,6 +63,7 @@ struct VideoPlayerView: View {
                             .background(in: .circle)
                             Spacer()
                             Button {
+                                isPlaying = false
                                 nextCallback?()
                             } label: {
                                 Image("next")

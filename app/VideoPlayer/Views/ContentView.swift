@@ -6,38 +6,50 @@
 //
 
 import SwiftUI
+import MarkdownUI
 
 struct ContentView: View {
-    @StateObject private var viewModel = VideoViewModel()
+    @StateObject private var videoViewModel = VideoViewModel()
 
     var body: some View {
         GeometryReader { geometry in
-            if viewModel.videos.indices.contains(viewModel.videosIndex) && !viewModel.isLoading {
+            if let currentVideo = videoViewModel.currentVideo, !videoViewModel.isLoading {
                 VStack(alignment: .center) {
                     VideoPlayerView(
-                        videoUrl: viewModel.videos[viewModel.videosIndex].hlsURL,
-                        isFirst: viewModel.videosIndex == 0,
-                        isLast: viewModel.videosIndex == viewModel.videos.count - 1,
+                        videoUrl: currentVideo.hlsURL,
+                        isFirst: videoViewModel.videosIndex == 0,
+                        isLast: videoViewModel.videosIndex == videoViewModel.videos.count - 1,
                         previousCallback: {
-                            viewModel.videosIndex -= 1
+                            videoViewModel.previousVideo()
                         },
                         nextCallback: {
-                            viewModel.videosIndex += 1
+                            videoViewModel.nextVideo()
                         }
                     )
                     .frame(width: geometry.size.width, height: geometry.size.width * 9 / 16, alignment: .center)
-                    VideoDescriptionView()
+                    ScrollView {
+                        VStack(alignment: .leading) {
+                            Text(currentVideo.title)
+                                .font(.title)
+                            Spacer()
+                            Text(currentVideo.author.name)
+                                .font(.subheadline)
+                            Spacer()
+                            Markdown(currentVideo.description)
+                        }
+                        .padding()
+                    }
                     Spacer()
                 }
-            } else if let errorMessage = viewModel.errorMessage {
+            } else if let errorMessage = videoViewModel.errorMessage {
                 // Error message view
                 VStack {
-                    Text("Error: \(viewModel.errorMessage ?? "")")
+                    Text("Error: \(errorMessage)")
                         .foregroundColor(.red)
                         .multilineTextAlignment(.center)
                         .padding()
                     Button("Retry") {
-                        viewModel.loadVideos()
+                        videoViewModel.loadVideos()
                     }
                 }
                 .position(x: geometry.frame(in: .local).midX, y: geometry.frame(in: .local).midY)
@@ -47,7 +59,7 @@ struct ContentView: View {
             }
         }
         .onAppear {
-            viewModel.loadVideos()
+            videoViewModel.loadVideos()
         }
     }
 }

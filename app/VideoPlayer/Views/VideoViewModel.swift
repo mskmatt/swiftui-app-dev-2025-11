@@ -13,6 +13,13 @@ class VideoViewModel: ObservableObject {
     @Published var errorMessage: String?
     @Published var videosIndex: Int = 0
 
+    var currentVideo: VideoModel? {
+        guard videos.indices.contains(videosIndex) else {
+            return nil
+        }
+        return videos[videosIndex]
+    }
+
     func loadVideos() {
         isLoading = true
         errorMessage = nil
@@ -28,5 +35,15 @@ class VideoViewModel: ObservableObject {
                 }
             }
         }
+    }
+
+    func previousVideo() {
+        guard videosIndex > 0 else { return }
+        videosIndex -= 1
+    }
+
+    func nextVideo() {
+        guard videosIndex < videos.count - 1 else { return }
+        videosIndex += 1
     }
 }

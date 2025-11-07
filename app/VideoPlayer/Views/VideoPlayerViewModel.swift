@@ -10,10 +10,11 @@ import AVKit
 
 @MainActor
 class VideoPlayerViewModel: ObservableObject{
-    static let shared = VideoPlayerViewModel()
     @Published var player: AVPlayer?
     @Published var isFirst = false
     @Published var isLast = false
+
+    static let shared = VideoPlayerViewModel()
 
     private init() {}
 }

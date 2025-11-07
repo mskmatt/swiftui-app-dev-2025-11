@@ -18,7 +18,7 @@ class VideoService: VideoServiceProtocol {
     private init() {}
 
     func getVideoList(completion: @escaping (Result<[VideoModel], AFError>) -> Void) {
-        let response = AF.request("http://localhost:4000/videos", method: .get)
+        AF.request("http://localhost:4000/videos", method: .get)
             .validate()
             .responseDecodable(of: [VideoModel].self) { response in
                 switch response.result {
