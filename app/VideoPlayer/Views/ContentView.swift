@@ -12,12 +12,27 @@ struct ContentView: View {
 
     var body: some View {
         GeometryReader { geometry in
-            if viewModel.isLoading {
-                ProgressView("Loading...")
+            if viewModel.videos.indices.contains(viewModel.videosIndex) && !viewModel.isLoading {
+                VStack(alignment: .center) {
+                    VideoPlayerView(
+                        videoUrl: viewModel.videos[viewModel.videosIndex].hlsURL,
+                        isFirst: viewModel.videosIndex == 0,
+                        isLast: viewModel.videosIndex == viewModel.videos.count - 1,
+                        previousCallback: {
+                            viewModel.videosIndex -= 1
+                        },
+                        nextCallback: {
+                            viewModel.videosIndex += 1
+                        }
+                    )
+                    .frame(width: geometry.size.width, height: geometry.size.width * 9 / 16, alignment: .center)
+                    VideoDescriptionView()
+                    Spacer()
+                }
             } else if let errorMessage = viewModel.errorMessage {
                 // Error message view
                 VStack {
-                    Text("Error: \(errorMessage)")
+                    Text("Error: \(viewModel.errorMessage ?? "")")
                         .foregroundColor(.red)
                         .multilineTextAlignment(.center)
                         .padding()
@@ -25,13 +40,10 @@ struct ContentView: View {
                         viewModel.loadVideos()
                     }
                 }
+                .position(x: geometry.frame(in: .local).midX, y: geometry.frame(in: .local).midY)
             } else {
-                VStack(alignment: .center) {
-                    VideoPlayerView()
-                        .frame(width: geometry.size.width, height: geometry.size.width * 9 / 16, alignment: .center)
-                    VideoDescriptionView()
-                    Spacer()
-                }
+                ProgressView("Loading...")
+                    .position(x: geometry.frame(in: .local).midX, y: geometry.frame(in: .local).midY)
             }
         }
         .onAppear {

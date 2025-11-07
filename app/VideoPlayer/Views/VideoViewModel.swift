@@ -11,6 +11,7 @@ class VideoViewModel: ObservableObject {
     @Published var videos: [VideoModel] = []
     @Published var isLoading = false
     @Published var errorMessage: String?
+    @Published var videosIndex: Int = 0
 
     func loadVideos() {
         isLoading = true

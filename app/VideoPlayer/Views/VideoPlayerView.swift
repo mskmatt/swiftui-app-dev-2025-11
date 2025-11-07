@@ -9,24 +9,47 @@ import SwiftUI
 import AVKit
 
 struct VideoPlayerView: View {
-    @State private var player: AVPlayer?
+    @ObservedObject var videoPlayerViewModel = VideoPlayerViewModel.shared
     @State private var isPlaying = false
-    @State private var isFirst = false
-    @State private var isLast = false
+
+    private var previousCallback: (() -> Void)?
+    private var nextCallback: (() -> Void)?
+
+    init(
+        videoUrl: String,
+        isFirst: Bool,
+        isLast: Bool,
+        previousCallback: (() -> Void)?,
+        nextCallback: (() -> Void)?
+    ) {
+        self.videoPlayerViewModel.isFirst = isFirst
+        self.videoPlayerViewModel.isLast = isLast
+        self.previousCallback = previousCallback
+        self.nextCallback = nextCallback
+        guard let url = URL(string: videoUrl) else {
+            return
+        }
+        if videoPlayerViewModel.player == nil {
+            videoPlayerViewModel.player = AVPlayer(url: url)
+        } else {
+            videoPlayerViewModel.player?.pause()
+            videoPlayerViewModel.player?.replaceCurrentItem(with: AVPlayerItem(url: url))
+        }
+    }
 
     var body: some View {
         HStack {
-            if let player {
+            if let player = videoPlayerViewModel.player {
                 AVPlayerControllerRepresented(player: player)
                     .overlay(alignment: .center) {
                         HStack {
                             Button {
-                                // TODO: implement previous button
+                                previousCallback?()
                             } label: {
                                 Image("previous")
-                                    .disabled(isFirst)
                                     .padding()
                             }
+                            .disabled(self.videoPlayerViewModel.isFirst)
                             .background(in: .circle)
                             Spacer()
                             Button {
@@ -39,23 +62,17 @@ struct VideoPlayerView: View {
                             .background(in: .circle)
                             Spacer()
                             Button {
-                                // TODO: implement next button
+                                nextCallback?()
                             } label: {
                                 Image("next")
-                                    .disabled(isLast)
                                     .padding()
                             }
+                            .disabled(self.videoPlayerViewModel.isLast)
                             .background(in: .circle)
                         }
                         .padding()
                     }
             }
-        }
-        .task {
-            guard let url = URL(string: "https://d140vvwqovffrf.cloudfront.net/media/5e87b9a811599/hls/index.m3u8") else {
-                return
-            }
-            player = AVPlayer(url: url)
         }
     }
 }
@@ -75,5 +92,29 @@ struct AVPlayerControllerRepresented: UIViewControllerRepresentable {
 }
 
 #Preview {
-    VideoPlayerView()
+    VideoPlayerView(
+        videoUrl: "https://d140vvwqovffrf.cloudfront.net/media/5e87b9a811599/hls/index.m3u8",
+        isFirst: true,
+        isLast: false,
+        previousCallback: {
+            print("previous")
+        },
+        nextCallback: {
+            print("next")
+        }
+    )
+}
+
+#Preview {
+    VideoPlayerView(
+        videoUrl: "https://d140vvwqovffrf.cloudfront.net/media/5e852de33c8e4/hls/index.m3u8",
+        isFirst: false,
+        isLast: true,
+        previousCallback: {
+            print("previous")
+        },
+        nextCallback: {
+            print("next")
+        }
+    )
 }
